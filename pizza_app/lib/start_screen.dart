@@ -54,12 +54,14 @@ class _StartScreenState extends State<StartScreen> {
                       controller: _emailController,
                       text: 'Email',
                       hinttext: 'Введите ваш адрес эл. почты',
+                      obscureText: false,
                     ),
                     SizedBox(height: 20.0),
                     LoginDataField(
                       controller: _passwordController,
                       text: 'Пароль',
                       hinttext: 'Введите ваш пароль',
+                      obscureText: true,
                     ),
                     SizedBox(
                       height: 20.0,
@@ -104,6 +106,7 @@ class _StartScreenState extends State<StartScreen> {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 36.0,
+                      fontFamily: 'Lobster',
                     ),
                   ),
                 ],

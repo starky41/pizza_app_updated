@@ -4,8 +4,10 @@ class LoginDataField extends StatelessWidget {
   final String text;
   final String hinttext;
   final TextEditingController controller;
+  final bool obscureText;
+
   LoginDataField(
-      {required this.controller, required this.text, required this.hinttext});
+      {required this.controller, required this.text, required this.hinttext, required this.obscureText});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,6 +37,9 @@ class LoginDataField extends StatelessWidget {
             onChanged: (text) {
               print('First text field: $text');
             },
+            obscureText: obscureText,
+            enableSuggestions: false,
+            autocorrect: false,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hinttext,

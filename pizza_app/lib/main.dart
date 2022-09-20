@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
               print('Error');
             }
             if (snapshot.connectionState == ConnectionState.done) {
+              print('SUCCESSFULLY CONNECTED TO FIREBASE!');
               return StartScreen();
             }
             return Scaffold(
