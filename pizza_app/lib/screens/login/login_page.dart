@@ -4,6 +4,7 @@ import '../../widgets/login_button.dart';
 import '../../widgets/login_datafield.dart';
 import 'package:pizza_app/main.dart';
 import '../../widgets/loading.dart';
+import 'package:email_validator/email_validator.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   Future signIn() async {
     showDialog(
@@ -28,6 +30,25 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
+      // TODO: finish throwing errors
+      // if ((e) ==
+      //     '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.') {
+      //   return showDialog(
+      //     context: context,
+      //     builder: (context) => AlertDialog(
+      //       title: Text('Ошибка входа'),
+      //       content: Text('Неверный email и(или) пароль'),
+      //       actions: <Widget>[
+      //         TextButton(
+      //           onPressed: () {
+      //             Navigator.of(context).pop();
+      //           },
+      //           child: Text('OK'),
+      //         )
+      //       ],
+      //     ),
+      //   );
+      // }
       print(e);
     }
 
@@ -50,54 +71,74 @@ class _LoginPageState extends State<LoginPage> {
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 100.0, horizontal: 100.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Добро пожаловать!',
-                  style: TextStyle(
-                    fontSize: 36.0,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Добро пожаловать!',
+                    style: TextStyle(
+                      fontSize: 36.0,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5.0),
-                const Text(
-                  'Добро пожаловать! Введите ваши данные для входа',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                const SizedBox(height: 100.0),
-                LoginDataField(
-                  controller: _emailController,
-                  text: 'Email',
-                  hinttext: 'Введите ваш адрес эл. почты',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 20.0),
-                LoginDataField(
-                  controller: _passwordController,
-                  text: 'Пароль',
-                  hinttext: 'Введите ваш пароль',
-                  obscureText: true,
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                LoginButton(
-                    buttonColor: Colors.orangeAccent,
-                    textColor: Colors.white,
-                    text: 'Войти',
+                  const SizedBox(height: 5.0),
+                  const Text(
+                    'Добро пожаловать! Введите ваши данные для входа',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  const SizedBox(height: 100.0),
+                  LoginDataField(
+                    validator: (email) {
+                      //if (!(text.contains('@')) && text.isNotEmpty) {
+                      if (!(EmailValidator.validate(email)) &&
+                          email.isNotEmpty) {
+                        return "Enter a valid email address!";
+                      }
+                      return null;
+                    },
+                    controller: _emailController,
+                    text: 'Email',
+                    hinttext: 'Введите ваш адрес эл. почты',
+                    obscureText: false,
+                  ),
+                  const SizedBox(height: 30.0),
+                  LoginDataField(
+                    validator: null,
+                    controller: _passwordController,
+                    text: 'Пароль',
+                    hinttext: 'Введите ваш пароль',
+                    obscureText: true,
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  LoginButton(
+                      buttonColor: Colors.orangeAccent,
+                      textColor: Colors.white,
+                      text: 'Войти',
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          signIn();
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   const SnackBar(
+                          //     duration: Duration(seconds: 1),
+                          //     content: Text('Обработка...'),
+                          //   ),
+                          // );
+                        }
+                      }),
+                  const SizedBox(height: 10.0),
+                  LoginButton(
+                    buttonColor: Colors.white,
+                    textColor: Colors.black,
+                    text: 'Регистрация',
                     onPressed: () {
-                      signIn();
-                    }),
-                const SizedBox(height: 10.0),
-                LoginButton(
-                  buttonColor: Colors.white,
-                  textColor: Colors.black,
-                  text: 'Регистрация',
-                  onPressed: () {
-                    print('hello');
-                  },
-                )
-              ],
+                      print('hello');
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),

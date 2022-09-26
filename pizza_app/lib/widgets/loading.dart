@@ -8,16 +8,16 @@ class LoadingWidget extends StatelessWidget {
     return Center(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(
+          children: const <Widget>[
+            SizedBox(
               height: 100.0,
               width: 100.0,
-              child: const CircularProgressIndicator(),
+              child: CircularProgressIndicator(),
             ),
-            const SizedBox(
+            SizedBox(
               height: 20,
             ),
-            const Text(
+            Text(
               'Загрузка',
               style: TextStyle(fontSize: 20.0),
             ),
