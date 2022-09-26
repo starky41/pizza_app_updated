@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './widgets/login_datafield.dart';
-import './widgets/login_button.dart';
+import '../widgets/login_datafield.dart';
+import '../widgets/login_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class StartScreen extends StatefulWidget {
