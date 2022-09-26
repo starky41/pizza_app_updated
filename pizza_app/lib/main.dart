@@ -5,7 +5,14 @@ import './start_screen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: "AIzaSyDM-hVa0I6dxmOccjToOK3hngafLrg_YBY",
+      appId: "1:135269552783:web:897477adf9cda589dd16fa",
+      messagingSenderId: "135269552783",
+      projectId: "pizza-project-4dd63",
+    ),
+  );
   runApp(MyApp());
 }
 
@@ -13,6 +20,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

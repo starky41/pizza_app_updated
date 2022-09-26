@@ -4,13 +4,14 @@ class LoginButton extends StatelessWidget {
   final Color buttonColor;
   final Color textColor;
   final String text;
-  final Function onPressed;
+  final VoidCallback onPressed;
 
-  LoginButton(
-      {required this.buttonColor,
-      required this.textColor,
-      required this.text,
-      required this.onPressed});
+  LoginButton({
+    required this.buttonColor,
+    required this.textColor,
+    required this.text,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +31,13 @@ class LoginButton extends StatelessWidget {
         ],
       ),
       child: TextButton(
-        onPressed: () {
-          print('Войти');
-        },
-        child: Text(text,
-            style: TextStyle(
-              color: textColor,
-            )),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: textColor,
+          ),
+        ),
       ),
     );
   }
