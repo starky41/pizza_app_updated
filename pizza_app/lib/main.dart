@@ -4,12 +4,15 @@ import './firebase_config.dart';
 
 import './screens/start_screen.dart';
 import './screens/initialization.dart';
+import './screens/login/homepage.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: options);
   runApp(MyApp());
 }
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -18,12 +21,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,
       title: 'Пиццерия',
       theme: ThemeData(primarySwatch: Colors.orange),
       initialRoute: '/',
       routes: {
         '/': (context) => Initialization(_initialization, '/start'),
-        '/start': (context) => const StartScreen()
+        '/start': (context) => const StartScreen(),
+        '/home': (context) => HomePage(),
       },
     );
   }

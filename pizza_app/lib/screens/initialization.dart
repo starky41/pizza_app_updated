@@ -22,7 +22,7 @@ class Initialization extends StatelessWidget {
             Navigator.pushNamed(context, route);
           });
         }
-        return Scaffold(
+        return const Scaffold(
           body: LoadingWidget(),
         );
       },
