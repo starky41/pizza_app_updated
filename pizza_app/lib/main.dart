@@ -5,6 +5,7 @@ import './firebase_config.dart';
 import './screens/start_screen.dart';
 import './screens/initialization.dart';
 import './screens/login/homepage.dart';
+import './screens/employees.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Initialization(_initialization, '/start'),
         '/start': (context) => const StartScreen(),
         '/home': (context) => HomePage(),
+        '/collections/employees': (context) => EmployeesCollection(),
       },
     );
   }

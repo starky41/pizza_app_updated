@@ -23,8 +23,14 @@ class HomePage extends StatelessWidget {
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               TextButton(
-                child: const Text('Sign Out'),
+                child: const Text('Выйти'),
                 onPressed: () => FirebaseAuth.instance.signOut(),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/collections/employees');
+                },
+                child: const Text('next page'),
               ),
             ],
           ),

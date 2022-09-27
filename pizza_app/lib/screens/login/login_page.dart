@@ -30,7 +30,6 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
-      // TODO: finish throwing errors
       print(e);
       return showDialog(
         context: context,
@@ -88,7 +87,6 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 100.0),
                   LoginDataField(
                     validator: (email) {
-                      //if (!(text.contains('@')) && text.isNotEmpty) {
                       if (!(EmailValidator.validate(email)) &&
                           email.isNotEmpty) {
                         return "Enter a valid email address!";
@@ -118,12 +116,6 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           signIn();
-                          // ScaffoldMessenger.of(context).showSnackBar(
-                          //   const SnackBar(
-                          //     duration: Duration(seconds: 1),
-                          //     content: Text('Обработка...'),
-                          //   ),
-                          // );
                         }
                       }),
                   const SizedBox(height: 10.0),
