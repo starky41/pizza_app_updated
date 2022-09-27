@@ -31,25 +31,23 @@ class _LoginPageState extends State<LoginPage> {
       );
     } on FirebaseAuthException catch (e) {
       // TODO: finish throwing errors
-      // if ((e) ==
-      //     '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.') {
-      //   return showDialog(
-      //     context: context,
-      //     builder: (context) => AlertDialog(
-      //       title: Text('Ошибка входа'),
-      //       content: Text('Неверный email и(или) пароль'),
-      //       actions: <Widget>[
-      //         TextButton(
-      //           onPressed: () {
-      //             Navigator.of(context).pop();
-      //           },
-      //           child: Text('OK'),
-      //         )
-      //       ],
-      //     ),
-      //   );
-      // }
       print(e);
+      return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Ошибка входа'),
+          content: Text('$e'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                navigatorKey.currentState!
+                    .popUntil(ModalRoute.withName('/start'));
+              },
+              child: const Text('OK'),
+            )
+          ],
+        ),
+      );
     }
 
     navigatorKey.currentState!.popUntil(ModalRoute.withName('/start'));

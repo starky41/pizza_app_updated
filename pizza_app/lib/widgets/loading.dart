@@ -19,7 +19,7 @@ class LoadingWidget extends StatelessWidget {
             ),
             Text(
               'Загрузка',
-              style: TextStyle(fontSize: 20.0),
+              style: TextStyle(fontSize: 20.0, color: Colors.orangeAccent),
             ),
           ]),
     );
